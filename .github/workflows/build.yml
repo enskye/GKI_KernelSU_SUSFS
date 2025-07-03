@@ -178,11 +178,11 @@ jobs:
               ;;
             "KSU")
               echo "Adding KernelSU Official..."
-              curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash ${{ env.BRANCH }}
+              curl -LSs "https://raw.githubusercontent.com/pershoot/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs
               ;;
             "NEXT")
               echo "Adding KernelSU Next..."
-              curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash ${{ env.BRANCH }}
+              curl -LSs "https://raw.githubusercontent.com/builtbyvys/KernelSU-Next/next-susfs/kernel/setup.sh" | bash ${{ env.BRANCH }}
               ;;
             "MKSU")
               echo "Adding KernelSU MKSU..."
@@ -228,22 +228,22 @@ jobs:
               patch -p1 --forward --fuzz=3 < 10_enable_susfs_for_ksu.patch
               ;;
             "NEXT")
-              echo "Applying SUSFS patches for KernelSU Next..."
-              cd ./KernelSU-Next
-              cp ../../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./
-              patch -p1 --forward --fuzz=3 < 10_enable_susfs_for_ksu.patch || true
-              cp ../../kernel_patches/next/fix_apk_sign.c.patch ./
-              patch -p1 --forward --fuzz=3 < fix_apk_sign.c.patch
-              cp ../../kernel_patches/next/fix_core_hook.c.patch ./
-              patch -p1 --forward --fuzz=3 < fix_core_hook.c.patch
-              cp ../../kernel_patches/next/fix_selinux.c.patch ./
-              patch -p1 --forward --fuzz=3 < fix_selinux.c.patch
-              cp ../../kernel_patches/next/fix_ksud.c.patch ./
-              patch -p1 --forward --fuzz=3 < fix_ksud.c.patch
+              #echo "Applying SUSFS patches for KernelSU Next..."
+              #cd ./KernelSU-Next
+              #cp ../../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./
+              #patch -p1 --forward --fuzz=3 < 10_enable_susfs_for_ksu.patch || true
+              #cp ../../kernel_patches/next/fix_apk_sign.c.patch ./
+              #patch -p1 --forward --fuzz=3 < fix_apk_sign.c.patch
+              #cp ../../kernel_patches/next/fix_core_hook.c.patch ./
+              #patch -p1 --forward --fuzz=3 < fix_core_hook.c.patch
+              #cp ../../kernel_patches/next/fix_selinux.c.patch ./
+              #patch -p1 --forward --fuzz=3 < fix_selinux.c.patch
+              #cp ../../kernel_patches/next/fix_ksud.c.patch ./
+              #patch -p1 --forward --fuzz=3 < fix_ksud.c.patch
               #cp ../../kernel_patches/next/fix_sucompat.c.patch ./
               #patch -p1 --forward --fuzz=3 < fix_sucompat.c.patch
-              cp ../../kernel_patches/next/0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch ./
-              patch -p1 --forward --fuzz=3 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch || true
+              #cp ../../kernel_patches/next/0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch ./
+              #patch -p1 --forward --fuzz=3 < 0001-kernel-implement-susfs-v1.5.8-KernelSU-Next-v1.0.8.patch || true
               #sed -i '/bool ksu_devpts_hook = false;/d' ./kernel/sucompat.c
               ;;
             "MKSU")
@@ -289,8 +289,8 @@ jobs:
           
           if [ "${{ inputs.kernelsu_variant }}" == "NEXT" ]; then
             echo "Applying hooks for KernelSU-Next..."
-            cp ../../kernel_patches/next/scope_min_manual_hooks_v1.4.patch ./
-            patch -p1 -F 3 < scope_min_manual_hooks_v1.4.patch
+            #cp ../../kernel_patches/next/scope_min_manual_hooks_v1.4.patch ./
+            #patch -p1 -F 3 < scope_min_manual_hooks_v1.4.patch
           elif [ "${{ inputs.kernelsu_variant }}" == "WILD" ]; then
             echo "Applying hooks for Wild KSU..."
             cp ../../kernel_patches/wild/syscall_hooks.patch ./
